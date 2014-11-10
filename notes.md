@@ -20,8 +20,22 @@ Notes
 
 * __NaN__ is __not a number__
 * __NaN__ is basically used to represent undefined value.
+* Used for undefined mathematical operations.
 * __NaN__ can be also taken as missing value.
 * 0/0 will return a __NaN__ 
+
+###Na
+
+* __Na__ is simply not available.
+
+### Functions to use with NaN and Na
+
+* There are two functions that are used mostly with Na and NaN.
+* Function `is.na()` is used to test objects if they are Na.
+* Function `is.nan()` is used to test objects if they are NaN.
+* Na values can have class too. E.g. missing integer value, or missing character value.
+* __NaN__ is also considered to be an __Na__, but reverse is not true.
+* Example: `q <- c(1,5,3,NaN,8,NaN)` and `p <- c(1,2,3,NA,NaN,9)` one can use both `is.na()` and `is.nan()` in these vectors.
 
 ### Vectors
 
@@ -123,6 +137,52 @@ __Using column or row binding__
 * Example: `l<-list(123,"list",TRUE,1+4i)`
 * Elements of a list will have double square brackets around index, while other vectors has only one square bracket.
 
+### Factors
+
+* Factor are vectors which represents categorical data.
+* Can be ordered or unordered. E.g. Male & Female (unordered) or Rank (ordered), so values will represent the category. E.g. male can be one and female can be zero.  
+* To make it easier to think, factor is a integer vector where each integer has a label. 
+* Factors are important for modelling functions. e.g. `lm()` and `glm()`
+* Example: `fac <- factor(c("yes","yes","no","NA","no","no","yes","yes","NA","NA","yes","yes"))` as you can tell, there are data which can be one of three values __yes__ or __no__ or __NA__. Now printing the vector will give us:
+`[1] yes yes no  NA  no  no  yes yes NA  NA  yes yes`
+`Levels: NA no yes`
+* `unclass()` function will bring the vector down to integer vector. Example: 
+`> unclass(fac)`
+`[1] 3 3 2 1 2 2 3 3 1 1 3 3`
+`attr(,"levels")`
+`[1] "NA"  "no"  "yes"`
+* As one can see above the __levels__ are ordered by R alphabetically, but one can specify how to order the level as well. 
+* Example: `> fac3 <- factor(c("yes","yes","no","NA","no","no","yes","yes","NA","NA","yes","yes"),levels=c("yes","NA","no"))`
+* It is important on data analysis to know the base level.
 
 
+### Data Frames
 
+* Data Frames are used to store tabular data.
+* These are very important in R.
+* Attributes of Data Frames:
+	** `row.names`
+* Functions that we used on Data Frames:
+	** `read.table()`
+	** `read.csv()`
+	** `data.matrix()` - This converts data frame to a matrix, but be-careful on conversion that happens.
+* Example:
+	`> d <- data.frame(foo=1:4, bar = c(T,T,F,F))`
+	`> d`
+	`foo   bar`
+	`1   1  TRUE`
+	`2   2  TRUE`
+	`3   3 FALSE`
+	`4   4 FALSE`
+
+### Names
+
+* R objects can be given names, so that it will be easier and self describing.
+* Example:
+	`person <-c("Jay","18","180")`
+	`names(person)<-c("Name","Age","Height")`
+* List can have names too. Example:
+	`m<-list(name="Jay",age=18,height=180)`
+* Matrix can have names to. They are called __dimnames__. Example:
+	`m<-matrix(1:4,nrow=2,ncol=2)`
+	`dimnames(m)<-list(c("man","woman"),c("age","height"))`
